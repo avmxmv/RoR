@@ -59,11 +59,36 @@ class Train
   attr_reader :type
   attr_reader :number
   attr_reader :len
+  attr_reader :speed
 
   def initialize(number, type, len)
     @number = number
     @type = type
     @len = len
+  end
+
+  def new_speed(speed)
+    @speed = speed
+  end
+
+  def speed_now
+    @speed
+  end
+
+  def stop
+    @speed = 0
+  end
+
+  def kol_vagonov
+    @len
+  end
+
+  def vagon(vagon)
+    if @speed == 0
+      @len += vagon
+    else
+      puts "Поезд движется"
+    end
   end
 end
 =begin

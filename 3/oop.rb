@@ -60,6 +60,7 @@ class Train
   attr_reader :number
   attr_reader :len
   attr_reader :speed
+  attr_reader :route
 
   def initialize(number, type, len)
     @number = number
@@ -88,6 +89,41 @@ class Train
       @len += vagon
     else
       puts "Поезд движется"
+    end
+  end
+
+  def marshrut
+    @route = []
+    @route << [Route.first, 1]
+    @route << Route.middle_st
+    @route << [Route.last, 0]
+  end
+
+  def station(flag)
+    if flag > 0
+      f = 0
+      @route.each do |el|
+        if f == 0 && el[1] == 1
+          f = 1
+          el[1] = 0
+        elsif f == 1
+          el[1] = 1
+          f = 2
+        end
+      end
+    end
+  end
+
+  def look_route
+    f = 0
+    @route.each do |el|
+      if f == 0 && el[1] == 1
+        el
+        f = 1
+      elsif f == 1
+        el
+        f = 2
+      end
     end
   end
 end

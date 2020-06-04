@@ -1,15 +1,8 @@
 class Station
+  attr_accessor :trains
   def initialize(name)
     @name = name
     @trains = []
-  end
-
-  def trains=(trains)
-    @trains = trains
-  end
-
-  def trains
-    @trains
   end
 
   def trains_by_type(type)

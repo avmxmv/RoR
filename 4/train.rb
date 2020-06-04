@@ -25,7 +25,7 @@ class Train
 
   def add_vagon(vagon)
     if vagon.type == @type
-      @vagons << 1
+      @vagons << vagon
     end
   end
 

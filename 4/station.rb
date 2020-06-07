@@ -1,8 +1,13 @@
 class Station
+  include All_st
   attr_accessor :trains
+
+  @@kol = 0
+
   def initialize(name)
     @name = name
     @trains = []
+    @@kol += 1
   end
 
   def trains_by_type(type)

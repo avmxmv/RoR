@@ -1,18 +1,16 @@
 class Route
+  include All_st
   attr_accessor :middle_stations
   attr_reader :first
   attr_reader :last
+
+  @@kol = 0
 
   def initialize(first, last)
     @first = first
     @last = last
     @middle_stations = []
-  end
-
-  def all_st
-    puts @first
-    puts @middle_stations
-    puts @last
+    @@kol += 1
   end
 
   private

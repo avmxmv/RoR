@@ -5,10 +5,17 @@ class Train
   attr_reader :route
   attr_accessor :vagons
 
+  @@kol = 0
+
+  def self.find(number)
+
+  end
+
   def initialize(number, type)
     @number = number
     @type = type
     @vagons = []
+    @@kol += 1
   end
 
   def new_speed(speed)
@@ -35,7 +42,6 @@ class Train
     end
   end
 end
-
 
 class PassengerTrain < Train  
 end

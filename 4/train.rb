@@ -5,14 +5,12 @@ class Train
   attr_reader :route
   attr_accessor :vagons
 
-  @@train = []
+  @@train = {}
   @@kol = 0
 
   def self.find(number)
-    @@train.each do |el|
-      if el[0] == number
-        el
-      end
+    if @@train[number]
+      @@train[number]
     end
   end
 
@@ -21,7 +19,7 @@ class Train
     @type = type
     @vagons = []
     @@kol += 1
-    @@train << [number, type]
+    @@train[number] = type
   end
 
   def new_speed(speed)

@@ -8,6 +8,7 @@ class Station
     @name = name
     @trains = []
     @@kol += 1
+    validate!
   end
 
   def trains_by_type(type)
@@ -18,9 +19,13 @@ class Station
     trains_by_type(type).count
   end
 
-  private 
-
+  private
   # я считаю что методы добавления и удаления должны быть приватными
+  def validate!
+    raise "Слишком длинное название" if name > 15
+    raise "Слишком короткое название" if name < 5
+  end
+
   def set_train(train)
     @trains << train
   end

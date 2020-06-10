@@ -9,17 +9,21 @@ class Train
   @@kol = 0
 
   def self.find(number)
-    if @@train[number]
-      @@train[number]
-    end
+    @@train[number]
   end
 
   def initialize(number, type)
-    @number = number
-    @type = type
-    @vagons = []
-    @@kol += 1
-    @@train[number] = type
+    begin
+      validate!
+      @number = number
+      @type = type
+      @vagons = []
+      @@kol += 1
+      @@train[number] = self
+      puts "Создан поезд с номером #{number}"
+    rescue
+      puts "Попробуйте ещё раз"
+    end
   end
 
   def new_speed(speed)
@@ -44,6 +48,12 @@ class Train
     if vagon.type == @type
       @vagons.delete_at(-1)
     end
+  end
+
+  private
+  def validate!
+    raise "Неверный тип поезда" if type != 'Passenger' || type != 'Cargo'
+    raise "Неверный формат номера поезда" if number !~ /^[a-zA-Z0-9]{3}-*[a-zA-Z0-9]{2}$/
   end
 end
 

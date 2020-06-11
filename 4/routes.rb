@@ -11,7 +11,7 @@ class Route
     @first = first
     @last = last
     @middle_stations = []
-    valid?
+    validate!
     @@kol += 1
     puts "Станции успешно добавлены"
   end
@@ -27,15 +27,14 @@ class Route
     validate!
     true
   rescue
-    puts "Введите данные ещё раз"
     false
   end
-
+  # добавление станции
   def add_st(station)
     middle_stations << station
     puts "Станция успешно добавлена"
   end
-
+  # удаление станции
   def del_st(station)
     middle_stations.delete(station)
     puts "Станция успешно удалена"

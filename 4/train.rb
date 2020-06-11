@@ -14,7 +14,7 @@ class Train
 
   def initialize(number, type)
     begin
-      valid?
+      validate!
       @number = number
       @type = type
       @vagons = []
@@ -25,28 +25,28 @@ class Train
       puts "Попробуйте ещё раз"
     end
   end
-
+  # установка новый скорости поезда
   def new_speed(speed)
     @speed = speed
     puts "Установлена скорость #{@speed}"
   end
-
+  # просмотр скорости поезда
   def speed_now
     @speed
   end
-
+  # остановка поезда
   def stop
     @speed = 0
     puts "Поезд остановился, есть возможность добавить вагон"
   end
-
+  # добавление вагона
   def add_vagon(vagon)
     if vagon.type == @type
       @vagons << vagon
       puts "Вагон успешно добавлен"
     end
   end
-
+  # удаление вагона
   def del_vagon(vagon)
     if vagon.type == @type
       @vagons.delete_at(-1)
@@ -64,7 +64,6 @@ class Train
     validate!
     true
   rescue
-    puts "Введите данные ещё раз"
     false
   end
 end

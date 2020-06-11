@@ -7,7 +7,7 @@ class Station
   def initialize(name)
     @name = name
     @trains = []
-    valid?
+    validate!
     @@kol += 1
   end
 
@@ -30,14 +30,13 @@ class Station
     validate!
     true
   rescue
-    puts "Введите данные ещё раз"
     false
   end
-
+  # добавление поезда
   def set_train(train)
     @trains << train
   end
-
+  # удаление поезда
   def unset_train(train)
     trains.delete(train)
   end

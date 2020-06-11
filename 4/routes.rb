@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Route
   include All_st
   attr_accessor :middle_stations
@@ -10,21 +11,33 @@ class Route
     @first = first
     @last = last
     @middle_stations = []
-    validate!
+    valid?
     @@kol += 1
+    puts "Станции успешно добавлены"
   end
 
   private
+
   # я считаю что методы добавления и удаления должны быть приватными
   def validate!
-    raise "Слишком длинное название" if first && last
+    raise 'Недостаточно станций' if first && last
+  end
+
+  def valid?
+    validate!
+    true
+  rescue
+    puts "Введите данные ещё раз"
+    false
   end
 
   def add_st(station)
     middle_stations << station
+    puts "Станция успешно добавлена"
   end
 
   def del_st(station)
     middle_stations.delete(station)
+    puts "Станция успешно удалена"
   end
 end

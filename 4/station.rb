@@ -7,8 +7,8 @@ class Station
   def initialize(name)
     @name = name
     @trains = []
+    valid?
     @@kol += 1
-    validate!
   end
 
   def trains_by_type(type)
@@ -24,6 +24,14 @@ class Station
   def validate!
     raise "Слишком длинное название" if name.length > 15
     raise "Слишком короткое название" if name.length < 3
+  end
+
+  def valid?
+    validate!
+    true
+  rescue
+    puts "Введите данные ещё раз"
+    false
   end
 
   def set_train(train)

@@ -53,7 +53,7 @@ class Train
   private
   def validate!
     raise "Неверный тип поезда" if type != 'Passenger' || type != 'Cargo'
-    raise "Неверный формат номера поезда" if number !~ /^[a-zA-Z0-9]{3}-*[a-zA-Z0-9]{2}$/
+    raise "Неверный формат номера поезда" if number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
   end
 end
 

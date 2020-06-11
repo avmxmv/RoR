@@ -22,8 +22,8 @@ class Station
   private
   # я считаю что методы добавления и удаления должны быть приватными
   def validate!
-    raise "Слишком длинное название" if name > 15
-    raise "Слишком короткое название" if name < 5
+    raise "Слишком длинное название" if name.length > 15
+    raise "Слишком короткое название" if name.length < 3
   end
 
   def set_train(train)

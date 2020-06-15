@@ -4,14 +4,6 @@ module Admin
 
     def initialize(name)
       @name = name
-	end
-  end
-end
-
-module All_st
-  def all_st
-   	puts @first
-   	puts @middle_stations
-   	puts @last
+	  end
   end
 end

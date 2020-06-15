@@ -1,4 +1,12 @@
 # frozen_string_literal: true
+module All_st
+  def all_st
+    puts @first
+    puts @middle_stations
+    puts @last
+  end
+end
+
 class Route
   include All_st
   attr_accessor :middle_stations

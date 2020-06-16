@@ -19,57 +19,86 @@ class Interface
       choice  = gets.chomp.to_i
       case choice
       when 1
-        puts 'Введите имя станции'
-        name = gets.chomp.to_str
-        @station << Station.new(name)
+        create_station
       when 2
-        puts 'Введите имя поезда'
-        name = gets.chomp.to_str
-        puts 'Выберите тип поезда'
-        type = gets.chomp.to_str
-        trains_arr << Train.new(name, type)
+        create_train
       when 3
-        puts station_arr
-        puts 'Введите индекс начальной станции'
-        index1 = gets.chomp.to_i
-        puts 'Введите индекс конечной станции'
-        index2 = gets.chomp.to_i
-        routes_arr << Route.new(station_arr[index1], station_arr[index2])
+        create_route
       when 4
-        puts routes_arr
-        puts 'Введите имя новой станции'
-        name = gets.chomp.to_str
-        puts 'Введите индекс маршрута'
-        index = gets.chomp.to_i
-        routes_arr[index].add_st(name)
+        add_station
       when 5
-        puts station_arr
-        puts 'Введите индекс станции'
-        index = gets.chomp.to_i
-        puts 'Введите имя станции для удаления'
-        name = gets.chomp.to_str
-        station_arr[index].del_st(name)
+        delete_station
       when 6
-        puts trains_arr
-        puts 'Введите индекс поезда'
-        index = gets.chomp.to_i
-        puts 'Введите новую скорость поезда'
-        speed = gets.chomp.to_i
-        trains_arr[index].new_speed(speed)
+        new_train_speed
       when 7
-        puts trains_arr
-        puts 'Введите индекс поезда'
-        index = gets.chomp.to_i
-        trains_arr[index].speed
+        look_train_speed
       when 8
-        puts trains_arr
-        puts 'Введите индекс поезда'
-        index = gets.chomp.to_i
-        trains_arr[index].stop
+        stop_train
       else
         puts 'Неправильные данные'
       end
     end
+  end
+
+  def create_station
+    puts 'Введите имя станции'
+    name = gets.chomp.to_str
+    @station << Station.new(name)
+  end
+
+  def create_train
+    puts 'Введите имя поезда'
+    name = gets.chomp.to_str
+    puts 'Выберите тип поезда'
+    type = gets.chomp.to_str
+    @trains << Train.new(name, type)
+  end
+
+  def create_route
+    puts @stations
+    puts 'Введите индекс начальной станции'
+    index1 = gets.chomp.to_i
+    puts 'Введите индекс конечной станции'
+    index2 = gets.chomp.to_i
+    @routes << Route.new(@stations[index1], @stations[index2])
+  end
+
+  def add_station
+    puts 'Введите имя поезда'
+    name = gets.chomp.to_str
+    puts 'Выберите тип поезда'
+    type = gets.chomp.to_str
+    @routes << Train.new(name, type)
+  end
+
+  def delete_station
+    puts @stations
+    puts 'Введите индекс станции'
+    index = gets.chomp.to_i
+    @stations.delete[index]
+  end
+
+  def new_train_speed
+    puts @trains
+    puts 'Введите индекс поезда'
+    index = gets.chomp.to_i
+    puts 'Введите новую скорость поезда'
+    speed = gets.chomp.to_i
+    @trains[index].new_speed(speed)
+  end
+
+  def look_train_speed
+    puts @trains
+    puts 'Введите индекс поезда'
+    index = gets.chomp.to_i
+    @trains[index].speed
+  end
+
+  def stop_train
+    puts @trains
+    puts 'Введите индекс поезда'
+    index = gets.chomp.to_i
+    @trains[index].stop
   end
 
   def help # информация

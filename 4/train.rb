@@ -13,17 +13,13 @@ class Train
   end
 
   def initialize(number, type)
-    begin
-      @number = number
-      @type = type
-      @vagons = []
-      validate!
-      @@kol += 1
-      @@train[number] = self
-      puts "Создан поезд с номером #{number}"
-    rescue
-      puts "Попробуйте ещё раз"
-    end
+    @number = number
+    @type = type
+    @vagons = []
+    validate!
+    @@kol += 1
+    @@train[number] = self
+    puts "Создан поезд с номером #{number}"
   end
   # установка новый скорости поезда
   def new_speed(speed)
@@ -56,7 +52,7 @@ class Train
 
   private
   def validate!
-    raise "Неверный тип поезда" if %w[Passenger Cargo].exclude?(@type)
+    raise "Неверный тип поезда" if @type != 'PassengerTrain' and @type != 'CargoTrain'
     raise "Неверный формат номера поезда" if @number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
   end
 
@@ -64,6 +60,7 @@ class Train
     validate!
     true
   rescue
+    puts "Попробуйте ещё раз"
     false
   end
 end

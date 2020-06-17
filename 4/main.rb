@@ -34,28 +34,26 @@ class Interface
         look_train_speed
       when 8
         stop_train
-      else
-        puts 'Неправильные данные'
       end
     end
   end
 
   def create_station
     puts 'Введите имя станции'
-    name = gets.chomp.to_str
-    @station << Station.new(name)
+    name = gets.chomp
+    @stations << Station.new(name)
   end
 
   def create_train
     puts 'Введите имя поезда'
-    name = gets.chomp.to_str
-    puts 'Выберите тип поезда'
-    type = gets.chomp.to_str
+    name = gets.chomp
+    puts 'Введите тип поезда'
+    type = gets.chomp
     @trains << Train.new(name, type)
   end
 
   def create_route
-    puts @stations
+    puts @stations.inspect
     puts 'Введите индекс начальной станции'
     index1 = gets.chomp.to_i
     puts 'Введите индекс конечной станции'
@@ -64,22 +62,22 @@ class Interface
   end
 
   def add_station
-    puts 'Введите имя поезда'
-    name = gets.chomp.to_str
-    puts 'Выберите тип поезда'
-    type = gets.chomp.to_str
-    @routes << Train.new(name, type)
+    puts 'Введите имя станции'
+    name = gets.chomp
+    station = Station.new(name)
+    @stations << station
+    @routes << station
   end
 
   def delete_station
-    puts @stations
+    puts @stations.inspect
     puts 'Введите индекс станции'
     index = gets.chomp.to_i
     @stations.delete[index]
   end
 
   def new_train_speed
-    puts @trains
+    puts @trains.inspect
     puts 'Введите индекс поезда'
     index = gets.chomp.to_i
     puts 'Введите новую скорость поезда'
@@ -88,14 +86,14 @@ class Interface
   end
 
   def look_train_speed
-    puts @trains
+    puts @trains.inspect
     puts 'Введите индекс поезда'
     index = gets.chomp.to_i
     @trains[index].speed
   end
 
   def stop_train
-    puts @trains
+    puts @trains.inspect
     puts 'Введите индекс поезда'
     index = gets.chomp.to_i
     @trains[index].stop

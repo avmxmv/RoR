@@ -1,6 +1,7 @@
 class Station
   include All_st
   attr_accessor :trains
+  attr_accessor :name
 
   @@kol = 0
 

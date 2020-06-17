@@ -1,8 +1,8 @@
 class Train
-  attr_reader :type
-  attr_reader :number
-  attr_reader :speed
-  attr_reader :route
+  attr_accessor :type
+  attr_accessor :number
+  attr_accessor :speed
+  attr_accessor :route
   attr_accessor :vagons
 
   @@train = {}
@@ -14,10 +14,10 @@ class Train
 
   def initialize(number, type)
     begin
-      validate!
       @number = number
       @type = type
       @vagons = []
+      validate!
       @@kol += 1
       @@train[number] = self
       puts "Создан поезд с номером #{number}"
@@ -56,8 +56,8 @@ class Train
 
   private
   def validate!
-    raise "Неверный тип поезда" if type != 'Passenger' || type != 'Cargo'
-    raise "Неверный формат номера поезда" if number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
+    raise "Неверный тип поезда" if %w[Passenger Cargo].exclude?(@type)
+    raise "Неверный формат номера поезда" if @number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
   end
 
   def valid?

@@ -12,9 +12,8 @@ class Train
     @@train[number]
   end
 
-  def initialize(number, type)
+  def initialize(number)
     @number = number
-    @type = type
     @vagons = []
     validate!
     @@kol += 1
@@ -47,6 +46,42 @@ class Train
     if vagon.type == @type
       @vagons.delete_at(-1)
       puts "Вагон успешно удалён"
+    end
+  end
+
+  def set_route(route)
+    @route = route
+    @current_station = @route.stations.first
+    @current_station.set_train(self)
+  end
+
+  def current_station_index
+    @route.stations.index(@current_station)
+  end
+
+  def next_station
+    @route.stations[current_station_index + 1]
+  end
+
+  def prev_station
+    if current_station_index != 0
+      @route.stations[current_station_index - 1]
+    end
+  end
+
+  def forward
+    if next_station
+      @current_station.unset_train(self)
+      @current_station = next_station
+      @current_station.set_train(self)
+    end
+  end
+
+  def backward
+    if prev_station
+      @current_station.unset_train(self)
+      @current_station = prev_station
+      @current_station.set_train(self)
     end
   end
 

@@ -9,7 +9,7 @@ end
 
 class Route
   include All_st
-  attr_accessor :middle_stations
+  attr_accessor :stations
   attr_reader :first
   attr_reader :last
 
@@ -18,10 +18,21 @@ class Route
   def initialize(first, last)
     @first = first
     @last = last
-    @middle_stations = []
+    @stations = [first, last]
     validate!
     @@kol += 1
     puts "Станции успешно добавлены"
+  end
+
+  # добавление станции
+  def add_st(station)
+    @station.insert(-2, station)
+    puts "Станция успешно добавлена"
+  end
+  # удаление станции
+  def del_st(station)
+    @station.delete(station)
+    puts "Станция успешно удалена"
   end
 
   private
@@ -36,15 +47,5 @@ class Route
     true
   rescue
     false
-  end
-  # добавление станции
-  def add_st(station)
-    middle_stations << station
-    puts "Станция успешно добавлена"
-  end
-  # удаление станции
-  def del_st(station)
-    middle_stations.delete(station)
-    puts "Станция успешно удалена"
   end
 end

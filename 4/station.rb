@@ -19,6 +19,14 @@ class Station
   def count_trains_by_type(type)
     trains_by_type(type).count
   end
+  # добавление поезда
+  def set_train(train)
+    @trains << train
+  end
+  # удаление поезда
+  def unset_train(train)
+    trains.delete(train)
+  end
 
   private
   # я считаю что методы добавления и удаления должны быть приватными
@@ -32,13 +40,5 @@ class Station
     true
   rescue
     false
-  end
-  # добавление поезда
-  def set_train(train)
-    @trains << train
-  end
-  # удаление поезда
-  def unset_train(train)
-    trains.delete(train)
   end
 end

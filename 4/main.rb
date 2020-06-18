@@ -16,6 +16,7 @@ class Interface
   def run # главный запуск
     loop do
       help # вызов информации выбора каждый раз
+      puts "Выберите пункт"
       choice  = gets.chomp.to_i
       case choice
       when 1
@@ -34,6 +35,12 @@ class Interface
         look_train_speed
       when 8
         stop_train
+      when 9
+        route_for_train
+      when 10
+        main_forward
+      when 11
+        main_backward
       end
     end
   end
@@ -47,9 +54,15 @@ class Interface
   def create_train
     puts 'Введите имя поезда'
     name = gets.chomp
-    puts 'Введите тип поезда'
+    puts 'Выберите тип поезда'
+    puts '1. PassengerTrain'
+    puts '2. CargoTrain'
     type = gets.chomp
-    @trains << Train.new(name, type)
+    if type == '1'
+      @trains << PassengerTrain.new(name)
+    else
+      @trains << CargoTrain.new(name)
+    end
   end
 
   def create_route
@@ -70,10 +83,9 @@ class Interface
   end
 
   def delete_station
-    puts @stations.inspect
-    puts 'Введите индекс станции'
-    index = gets.chomp.to_i
-    @stations.delete[index]
+    puts 'Введите имя станции'
+    name = gets.chomp
+    @stations.delete(@stations.find(name))
   end
 
   def new_train_speed
@@ -99,6 +111,30 @@ class Interface
     @trains[index].stop
   end
 
+  def route_for_train
+    puts @trains.inspect
+    puts "Выберите имя поезда"
+    t_name = gets.chomp
+    puts @routes.inspect
+    puts "Выберите индекс маршрута"
+    r_index = gets.chomp.to_i
+    @trains.find(t_name).set_route(@routes.index(r_index))
+  end
+
+  def main_forward
+    puts @trains.inspect
+    puts "Выберите имя поезда"
+    t_name = gets.chomp
+    @trains.find(t_name).forward
+  end
+
+  def main_backward
+    puts @trains.inspect
+    puts "Выберите имя поезда"
+    t_name = gets.chomp
+    @trains.find(t_name).backward
+  end
+
   def help # информация
     puts 'Добро пожаловать'
     puts 'Вы можете:'
@@ -110,6 +146,9 @@ class Interface
     puts '6. Установить скорость поезду'
     puts '7. Посмотреть текущую скорость поезда'
     puts '8. Остановить поезд'
+    puts '9. Присвоить маршрут поезду'
+    puts '10. Перемещение по маршруту вперёд на 1 станцию'
+    puts '10. Перемещение по маршруту назад на 1 станцию'
   end
 end
 

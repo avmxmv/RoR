@@ -41,6 +41,8 @@ class Interface
         main_forward
       when 11
         main_backward
+      when 12
+        check_station
       end
     end
   end
@@ -51,17 +53,28 @@ class Interface
     @stations << Station.new(name)
   end
 
+  def print_trains
+    @trains.each.with_index(1) do |train, index|
+      puts "#{index}. #{train.number}"
+    end
+  end
+
   def create_train
-    puts 'Введите имя поезда'
-    name = gets.chomp
-    puts 'Выберите тип поезда'
-    puts '1. PassengerTrain'
-    puts '2. CargoTrain'
-    type = gets.chomp
-    if type == '1'
-      @trains << PassengerTrain.new(name)
-    else
-      @trains << CargoTrain.new(name)
+    begin
+      puts 'Введите имя поезда'
+      name = gets.chomp
+      puts 'Выберите тип поезда'
+      puts '1. PassengerTrain'
+      puts '2. CargoTrain'
+      type = gets.chomp
+      if type == '1'
+        @trains << PassengerTrain.new(name)
+      else
+        @trains << CargoTrain.new(name)
+      end
+    rescue
+      puts "Неверные входные данные"
+      create_train
     end
   end
 
@@ -89,7 +102,7 @@ class Interface
   end
 
   def new_train_speed
-    puts @trains.inspect
+    print_trains
     puts 'Введите индекс поезда'
     index = gets.chomp.to_i
     puts 'Введите новую скорость поезда'
@@ -98,41 +111,47 @@ class Interface
   end
 
   def look_train_speed
-    puts @trains.inspect
+    print_trains
     puts 'Введите индекс поезда'
     index = gets.chomp.to_i
     @trains[index].speed
   end
 
   def stop_train
-    puts @trains.inspect
+    print_trains
     puts 'Введите индекс поезда'
     index = gets.chomp.to_i
     @trains[index].stop
   end
 
   def route_for_train
-    puts @trains.inspect
-    puts "Выберите имя поезда"
-    t_name = gets.chomp
+    print_trains
+    puts "Выберите номер поезда"
+    t_num = gets.chomp
     puts @routes.inspect
     puts "Выберите индекс маршрута"
     r_index = gets.chomp.to_i
-    @trains.find(t_name).set_route(@routes.index(r_index))
+    @trains.find(t_num).set_route(@routes.index(r_index))
   end
 
   def main_forward
-    puts @trains.inspect
-    puts "Выберите имя поезда"
-    t_name = gets.chomp
-    @trains.find(t_name).forward
+    print_trains
+    puts "Выберите номер поезда"
+    t_num = gets.chomp
+    @trains.find(t_num).forward
   end
 
   def main_backward
-    puts @trains.inspect
-    puts "Выберите имя поезда"
-    t_name = gets.chomp
-    @trains.find(t_name).backward
+    print_trains
+    puts "Выберите номер поезда"
+    t_num = gets.chomp
+    @trains.find(t_num).backward
+  end
+
+  def check_station
+    @stations.each.with_index(1) do |station, index|
+      puts "#{index}. #{station.name}"
+    end
   end
 
   def help # информация
@@ -148,7 +167,8 @@ class Interface
     puts '8. Остановить поезд'
     puts '9. Присвоить маршрут поезду'
     puts '10. Перемещение по маршруту вперёд на 1 станцию'
-    puts '10. Перемещение по маршруту назад на 1 станцию'
+    puts '11. Перемещение по маршруту назад на 1 станцию'
+    puts '12. Посмотреть список станций'
   end
 end
 

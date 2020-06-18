@@ -87,7 +87,7 @@ class Train
 
   private
   def validate!
-    raise "Неверный тип поезда" if @type != 'PassengerTrain' and @type != 'CargoTrain'
+    raise "Неверный тип поезда" if @type == 'PassengerTrain' or @type == 'CargoTrain'
     raise "Неверный формат номера поезда" if @number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
   end
 

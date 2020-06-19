@@ -171,7 +171,7 @@ class Interface
 
   def print_station
     @stations.each.with_index(1) do |station, index|
-      puts "#{index}. #{station.name}"
+      puts "#{index}. #{station.name}, поезда: #{station.trains}"
     end
   end
 

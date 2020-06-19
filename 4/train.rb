@@ -1,5 +1,4 @@
 class Train
-  attr_accessor :type
   attr_accessor :number
   attr_accessor :speed
   attr_accessor :route
@@ -36,17 +35,13 @@ class Train
   end
   # добавление вагона
   def add_vagon(vagon)
-    if vagon.type == @type
-      @vagons << vagon
-      puts "Вагон успешно добавлен"
-    end
+    @vagons << vagon
+    puts "Вагон успешно добавлен"
   end
   # удаление вагона
-  def del_vagon(vagon)
-    if vagon.type == @type
-      @vagons.delete_at(-1)
-      puts "Вагон успешно удалён"
-    end
+  def del_vagon
+    @vagons.delete_at(-1)
+    puts "Вагон успешно удалён"
   end
 
   def set_route(route)
@@ -87,7 +82,6 @@ class Train
 
   private
   def validate!
-    raise "Неверный тип поезда" if @type == 'PassengerTrain' or @type == 'CargoTrain'
     raise "Неверный формат номера поезда" if @number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
   end
 
@@ -97,19 +91,5 @@ class Train
   rescue
     puts "Попробуйте ещё раз"
     false
-  end
-end
-
-class PassengerTrain < Train  
-end
-
-class CargoTrain < Train
-end
-
-class Vagon
-  attr_accessor :type
-
-  def initialize(type)
-    @type = type  
   end
 end

@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
-require_relative 'routes'
+require_relative 'route'
 require_relative 'station'
 require_relative 'train'
-require_relative 'modules'
+require_relative 'module'
+require_relative 'cargo_carriages'
+require_relative 'cargo_trains'
+require_relative 'passenger_carriages'
+require_relative 'passenger_trains'
+require_relative 'carriages'
 
 class Interface
   def initialize
@@ -97,20 +102,33 @@ class Interface
     @routes << Route.new(@stations[index1], @stations[index2])
   end
 
+  def print_routes
+    @routes.each.with_index(1) do |route, index|
+      puts "#{index}. #{route.stations.first}, #{route.stations.last}"
+    end
+    puts @routes.inspect
+  end
+
   def add_station
-    print_station
+    print_routes
+    puts 'Введите номер маршрута'
+    route = @trains[gets.to_i - 1]
     puts 'Введите имя станции'
     name = gets.chomp
     station = Station.new(name)
     @stations << station
-    @routes << station
+    route.add_st(station)
   end
 
   def delete_station
+    print_routes
+    puts 'Введите номер маршрута'
+    route = @trains[gets.to_i - 1]
     print_station
     puts 'Введите имя станции'
     name = gets.chomp
-    @stations.delete(@stations.find(name))
+    station = @stations.find(name)
+    route.del_st(station)
   end
 
   def new_train_speed
@@ -161,7 +179,7 @@ class Interface
     print_trains
     train = select_train
     if train.class == PassengerTrain
-      vagon = PassengerCarriag.new
+      vagon = PassengerCarriage.new
     else
       vagon = CargoCarriage.new
     end

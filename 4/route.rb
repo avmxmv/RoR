@@ -19,7 +19,7 @@ class Route
     @first = first
     @last = last
     @stations = [first, last]
-    validate!
+    # validate!
     @@kol += 1
     puts "Станции успешно добавлены"
   end
@@ -39,7 +39,7 @@ class Route
 
   # я считаю что методы добавления и удаления должны быть приватными
   def validate!
-    raise 'Недостаточно станций' if first && last
+    raise 'Недостаточно станций' if first != nil && last != nil
   end
 
   def valid?

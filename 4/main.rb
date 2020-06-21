@@ -99,14 +99,13 @@ class Interface
     index1 = gets.chomp.to_i
     puts 'Введите индекс конечной станции'
     index2 = gets.chomp.to_i
-    @routes << Route.new(@stations[index1], @stations[index2])
+    @routes << Route.new(@stations[index1 - 1], @stations[index2 - 1])
   end
 
   def print_routes
     @routes.each.with_index(1) do |route, index|
-      puts "#{index}. #{route.stations.first}, #{route.stations.last}"
+      puts "#{index}. #{route.stations.first.name}, #{route.stations.last.name}"
     end
-    puts @routes.inspect
   end
 
   def add_station

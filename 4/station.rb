@@ -28,6 +28,11 @@ class Station
     trains.delete(train)
   end
 
+  def print_trains_for_station(&block)
+    block.call(@trains)
+    yield(@trains)
+  end
+
   private
   # я считаю что методы добавления и удаления должны быть приватными
   def validate!

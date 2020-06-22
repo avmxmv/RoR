@@ -52,6 +52,8 @@ class Interface
         add_vagon
       when 14
         del_vagon
+      when 15
+        abs
       end
     end
   end
@@ -178,9 +180,13 @@ class Interface
     print_trains
     train = select_train
     if train.class == PassengerTrain
-      vagon = PassengerCarriage.new
+      puts "Введите количество мест в вагоне"
+      kol = gets.chomp.to_i
+      vagon = PassengerCarriage(kol)
     else
-      vagon = CargoCarriage.new
+      puts "Введите количество объёма в вагоне"
+      volume = gets.chomp.to_i
+      vagon = CargoCarriage(volume)
     end
     train.add_vagon(vagon)
   end
@@ -189,6 +195,26 @@ class Interface
     print_trains
     train = select_train
     train.del_vagon
+  end
+
+  def booking(vagon)
+    train = select_train
+    train.vagons.each.with_index(1) do |vagon, index|
+      puts "#{index}. #{vagon}"
+    end
+    print 'Введите индекс вагона: '
+    train.vagons[gets.to_i - 1].reservation
+  end
+
+  def filling_out(vagon)
+    puts "Введите количество объёма которое хотите заполнить"
+    volume = gets.chomp.to_i
+    train = select_train
+    train.vagons.each.with_index(1) do |vagon, index|
+      puts "#{index}. #{vagon}"
+    end
+    print 'Введите индекс вагона: '
+    train.vagons[gets.to_i - 1].filling(volume)
   end
 
   def help # информация

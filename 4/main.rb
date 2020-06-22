@@ -197,21 +197,21 @@ class Interface
     train.del_vagon
   end
 
-  def booking(vagon)
+  def booking
     train = select_train
-    train.vagons.each.with_index(1) do |vagon, index|
-      puts "#{index}. #{vagon}"
+    train.vagons.each.with_index(1) do |vagon_c, index|
+      puts "#{index}. #{vagon_c}"
     end
     print 'Введите индекс вагона: '
     train.vagons[gets.to_i - 1].reservation
   end
 
-  def filling_out(vagon)
+  def filling_out
     puts "Введите количество объёма которое хотите заполнить"
     volume = gets.chomp.to_i
     train = select_train
-    train.vagons.each.with_index(1) do |vagon, index|
-      puts "#{index}. #{vagon}"
+    train.vagons.each.with_index(1) do |vagon_c, index|
+      puts "#{index}. #{vagon_c}"
     end
     print 'Введите индекс вагона: '
     train.vagons[gets.to_i - 1].filling(volume)

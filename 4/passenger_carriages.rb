@@ -1,23 +1,23 @@
 require_relative 'carriages'
 
 class PassengerCarriage < Carriage
-  attr_accessor :kol
-  attr_accessor :kol_occupied
+  attr_accessor :quantity
+  attr_accessor :quantity_occupied
 
-  def initialize(kol)
-    @kol = kol
-    @kol_occupied = 0
+  def initialize(quantity)
+    @quantity = quantity
+    @quantity_occupied = 0
   end
 
   def reservation
-    @kol_occupied += 1
+    @quantity_occupied += 1
   end
 
   def kol_reservation
-    puts "Количество занятых мест #{@kol_occupied}"
+    @quantity_occupied
   end
 
   def kol_free_sits
-    puts "Количество свободных мест #{@kol - @kol_occupied}"
+    @quantity - @quantity_occupied
   end
 end

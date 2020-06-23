@@ -28,9 +28,10 @@ class Station
     trains.delete(train)
   end
 
-  def print_trains_for_station(&block)
-    block.call(@trains)
-    yield(@trains)
+  def each_train(&block)
+    @trains.each do |el|
+      block.call(el)
+    end
   end
 
   private

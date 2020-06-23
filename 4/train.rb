@@ -80,6 +80,12 @@ class Train
     end
   end
 
+  def each_wagon(&block)
+    @vagons.each do |el|
+      block.call(el)
+    end
+  end
+
   private
   def validate!
     raise "Неверный формат номера поезда" if @number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/

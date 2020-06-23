@@ -14,10 +14,10 @@ class CargoCarriage < Carriage
   end
 
   def kol_reservation
-    puts "Количество занятого места #{@filled_volume}"
+    @filled_volume
   end
 
   def kol_free_sits
-    puts "Количество свободного места #{@volume - @filled_volume}"
+    @volume - @filled_volume
   end
 end

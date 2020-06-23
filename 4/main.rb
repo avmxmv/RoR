@@ -182,11 +182,11 @@ class Interface
     if train.class == PassengerTrain
       puts "Введите количество мест в вагоне"
       kol = gets.chomp.to_i
-      vagon = PassengerCarriage(kol)
+      vagon = PassengerCarriage.new(kol)
     else
       puts "Введите количество объёма в вагоне"
       volume = gets.chomp.to_i
-      vagon = CargoCarriage(volume)
+      vagon = CargoCarriage.new(volume)
     end
     train.add_vagon(vagon)
   end
@@ -197,11 +197,15 @@ class Interface
     train.del_vagon
   end
 
-  def booking
-    train = select_train
+  def print_vagons
     train.vagons.each.with_index(1) do |vagon_c, index|
       puts "#{index}. #{vagon_c}"
     end
+  end
+
+  def booking
+    train = select_train
+    print_vagons
     print 'Введите индекс вагона: '
     train.vagons[gets.to_i - 1].reservation
   end
@@ -210,9 +214,7 @@ class Interface
     puts "Введите количество объёма которое хотите заполнить"
     volume = gets.chomp.to_i
     train = select_train
-    train.vagons.each.with_index(1) do |vagon_c, index|
-      puts "#{index}. #{vagon_c}"
-    end
+    print_vagons
     print 'Введите индекс вагона: '
     train.vagons[gets.to_i - 1].filling(volume)
   end

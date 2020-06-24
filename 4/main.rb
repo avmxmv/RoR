@@ -106,7 +106,7 @@ class Interface
 
   def print_routes
     @routes.each.with_index(1) do |route, index|
-      puts "#{index}. #{route.stations.first.name}, #{route.stations.last.name}"
+      puts "#{index}. #{route.stations.first.name}-#{route.stations.last.name}"
     end
   end
 
@@ -151,10 +151,9 @@ class Interface
 
   def route_for_train
     train = select_train
-    puts @routes.inspect
+    print_routes
     puts "Выберите индекс маршрута"
-    r_index = gets.chomp.to_i
-    train.set_route(@routes.index(r_index))
+    train.set_route(@routes[gets.to_i - 1])
   end
 
   def main_forward

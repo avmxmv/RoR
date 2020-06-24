@@ -193,7 +193,7 @@ class Interface
     train.del_vagon
   end
 
-  def print_vagons
+  def print_vagons(train)
     train.vagons.each.with_index(1) do |vagon_c, index|
       puts "#{index}. #{vagon_c}"
     end
@@ -201,18 +201,20 @@ class Interface
 
   def booking
     train = select_train
-    print_vagons
+    print_vagons(train)
     print 'Введите индекс вагона: '
-    train.vagons[gets.to_i - 1].reservation
+    vagon = train.vagons[gets.to_i - 1]
+    vagon.reservation
   end
 
   def filling_out
+    train = select_train
     puts "Введите количество объёма которое хотите заполнить"
     volume = gets.chomp.to_i
-    train = select_train
-    print_vagons
+    print_vagons(train)
     print 'Введите индекс вагона: '
-    train.vagons[gets.to_i - 1].filling(volume)
+    vagon = train.vagons[gets.to_i - 1]
+    vagon.filling(volume)
   end
 
   def help # информация

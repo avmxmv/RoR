@@ -53,7 +53,9 @@ class Interface
       when 14
         del_vagon
       when 15
-        abs
+        booking
+      when 16
+        filling_out
       end
     end
   end
@@ -230,6 +232,8 @@ class Interface
     puts '12. Посмотреть список станций и список поездов на станции'
     puts '13. Добавлять вагоны к поезду'
     puts '14. Отцеплять вагоны от поезда'
+    puts '15. Бронировать места в вагоне'
+    puts '16. Заполнять вагон'
   end
 end
 

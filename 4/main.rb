@@ -150,7 +150,6 @@ class Interface
   end
 
   def route_for_train
-    print_trains
     train = select_train
     puts @routes.inspect
     puts "Выберите индекс маршрута"
@@ -159,13 +158,11 @@ class Interface
   end
 
   def main_forward
-    print_trains
     train = select_train
     train.forward
   end
 
   def main_backward
-    print_trains
     train = select_train
     train.backward
   end
@@ -177,7 +174,6 @@ class Interface
   end
 
   def add_vagon
-    print_trains
     train = select_train
     if train.class == PassengerTrain
       puts "Введите количество мест в вагоне"
@@ -192,7 +188,6 @@ class Interface
   end
 
   def del_vagon
-    print_trains
     train = select_train
     train.del_vagon
   end

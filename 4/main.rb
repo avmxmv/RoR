@@ -193,15 +193,19 @@ class Interface
     train.del_vagon
   end
 
-  def print_vagons(train)
+  def print_vagons(train, flag)
     train.vagons.each.with_index(1) do |vagon_c, index|
-      puts "#{index}. #{vagon_c}"
+      if flag == 1 && train.class == PassengerTrain
+        puts "#{index}. #{vagon_c}"
+      else
+        puts "#{index}. #{vagon_c}"
+      end
     end
   end
 
   def booking
     train = select_train
-    print_vagons(train)
+    print_vagons(train, 1)
     print 'Введите индекс вагона: '
     vagon = train.vagons[gets.to_i - 1]
     vagon.reservation
@@ -211,7 +215,7 @@ class Interface
     train = select_train
     puts "Введите количество объёма которое хотите заполнить"
     volume = gets.chomp.to_i
-    print_vagons(train)
+    print_vagons(train, 2)
     print 'Введите индекс вагона: '
     vagon = train.vagons[gets.to_i - 1]
     vagon.filling(volume)

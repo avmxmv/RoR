@@ -11,50 +11,25 @@ require_relative 'passenger_trains'
 require_relative 'carriages'
 
 class Interface
+  COMMANDS = {
+    '1' => 'create_station', '2' => 'create_train', '3' => 'create_route', '4' => 'add_station',
+    '5' => 'delete_station', '6' => 'new_train_speed', '7' => 'look_train_speed', '8' => 'stop_train',
+    '9' => 'route_for_train', '10' => 'main_forward', '11' => 'main_backward', '12' => 'print_station',
+    '13' => 'add_vagon', '14' => 'del_vagon', '15' => 'occupy_volume'
+  }.freeze
+
   def initialize
-    # код который выполняется при создании объекта
     @trains = []
     @routes = []
     @stations = []
   end
 
-  def run # главный запуск
+  def run
     loop do
-      help # вызов информации выбора каждый раз
-      puts "Выберите пункт"
-      choice  = gets.chomp.to_i
-      case choice
-      when 1
-        create_station
-      when 2
-        create_train
-      when 3
-        create_route
-      when 4
-        add_station
-      when 5
-        delete_station
-      when 6
-        new_train_speed
-      when 7
-        look_train_speed
-      when 8
-        stop_train
-      when 9
-        route_for_train
-      when 10
-        main_forward
-      when 11
-        main_backward
-      when 12
-        print_station
-      when 13
-        add_vagon
-      when 14
-        del_vagon
-      when 15
-        occupy_volume
-      end
+      help
+      puts 'Выберите пункт'
+      choice = gets.chomp
+      send(COMMANDS[choice])
     end
   end
 
@@ -77,22 +52,20 @@ class Interface
   end
 
   def create_train
-    begin
-      puts 'Введите имя поезда'
-      name = gets.chomp
-      puts 'Выберите тип поезда'
-      puts '1. PassengerTrain'
-      puts '2. CargoTrain'
-      type = gets.chomp
-      if type == '1'
-        @trains << PassengerTrain.new(name)
-      else
-        @trains << CargoTrain.new(name)
-      end
-    rescue => e
-      puts e.message
-      retry
-    end
+    puts 'Введите имя поезда'
+    name = gets.chomp
+    puts 'Выберите тип поезда'
+    puts '1. PassengerTrain'
+    puts '2. CargoTrain'
+    type = gets.chomp
+    @trains << if type == '1'
+                 PassengerTrain.new(name)
+               else
+                 CargoTrain.new(name)
+               end
+  rescue StandardError => e
+    puts e.message
+    retry
   end
 
   def create_route
@@ -152,7 +125,7 @@ class Interface
   def route_for_train
     train = select_train
     print_routes
-    puts "Выберите индекс маршрута"
+    puts 'Выберите индекс маршрута'
     train.set_route(@routes[gets.to_i - 1])
   end
 
@@ -175,11 +148,11 @@ class Interface
   def add_vagon
     train = select_train
     if train.class == PassengerTrain
-      puts "Введите количество мест в вагоне"
+      puts 'Введите количество мест в вагоне'
       kol = gets.chomp.to_i
       vagon = PassengerCarriage.new(kol)
     else
-      puts "Введите количество объёма в вагоне"
+      puts 'Введите количество объёма в вагоне'
       volume = gets.chomp.to_i
       vagon = CargoCarriage.new(volume)
     end
@@ -205,13 +178,13 @@ class Interface
     if vagon.class == PassengerCarriage
       vagon.reservation
     else
-      puts "Введите количество объёма которое хотите заполнить"
+      puts 'Введите количество объёма которое хотите заполнить'
       volume = gets.chomp.to_i
       vagon.filling(volume)
     end
   end
 
-  def help # информация
+  def help
     puts 'Добро пожаловать'
     puts 'Вы можете:'
     puts '1. Создать станцию'

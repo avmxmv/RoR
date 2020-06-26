@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Station
-  include All_st
+  include AllStation
   attr_accessor :trains
   attr_accessor :name
 
@@ -19,11 +21,11 @@ class Station
   def count_trains_by_type(type)
     trains_by_type(type).count
   end
-  # добавление поезда
+
   def set_train(train)
     @trains << train
   end
-  # удаление поезда
+
   def unset_train(train)
     trains.delete(train)
   end
@@ -35,16 +37,16 @@ class Station
   end
 
   private
-  # я считаю что методы добавления и удаления должны быть приватными
+
   def validate!
-    raise "Слишком длинное название" if name.length > 15
-    raise "Слишком короткое название" if name.length < 3
+    raise 'Слишком длинное название' if name.length > 15
+    raise 'Слишком короткое название' if name.length < 3
   end
 
   def valid?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 end

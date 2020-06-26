@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Admin
-  class Compani_name
+  class Name
     attr_accessor :name
 
     def initialize(name)
       @name = name
-	  end
+    end
   end
 end

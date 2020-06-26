@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Carriage
   attr_accessor :volume_or_quantity
   attr_accessor :filled_or_occupied

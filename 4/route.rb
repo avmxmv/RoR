@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-module All_st
+
+module AllStation
   def all_st
     puts @first
     puts @middle_stations
@@ -8,7 +9,7 @@ module All_st
 end
 
 class Route
-  include All_st
+  include AllStation
   attr_accessor :stations
   attr_reader :first
   attr_reader :last
@@ -19,33 +20,30 @@ class Route
     @first = first
     @last = last
     @stations = [first, last]
-    # validate!
     @@kol += 1
-    puts "Станции успешно добавлены"
+    puts 'Станции успешно добавлены'
   end
 
-  # добавление станции
   def add_st(station)
     @station.insert(-2, station)
-    puts "Станция успешно добавлена"
+    puts 'Станция успешно добавлена'
   end
-  # удаление станции
+
   def del_st(station)
     @station.delete(station)
-    puts "Станция успешно удалена"
+    puts 'Станция успешно удалена'
   end
 
   private
 
-  # я считаю что методы добавления и удаления должны быть приватными
   def validate!
-    raise 'Недостаточно станций' if first != nil && last != nil
+    raise 'Недостаточно станций' if !first.nil? && !last.nil?
   end
 
   def valid?
     validate!
     true
-  rescue
+  rescue StandardError
     false
   end
 end

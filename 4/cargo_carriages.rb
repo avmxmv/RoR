@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'carriages'
 
 class CargoCarriage < Carriage
@@ -5,7 +7,7 @@ class CargoCarriage < Carriage
     if @filled_or_occupied + kol <= @volume_or_quantity
       @filled_or_occupied += kol
     else
-      puts "Слишком большой объём"
+      puts 'Слишком большой объём'
     end
   end
 end

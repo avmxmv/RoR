@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Train
   attr_accessor :number
   attr_accessor :speed
@@ -19,29 +21,29 @@ class Train
     @@train[number] = self
     puts "Создан поезд с номером #{number}"
   end
-  # установка новый скорости поезда
+
   def new_speed(speed)
     @speed = speed
     puts "Установлена скорость #{@speed}"
   end
-  # просмотр скорости поезда
+
   def speed_now
     @speed
   end
-  # остановка поезда
+
   def stop
     @speed = 0
-    puts "Поезд остановился, есть возможность добавить вагон"
+    puts 'Поезд остановился, есть возможность добавить вагон'
   end
-  # добавление вагона
+
   def add_vagon(vagon)
     @vagons << vagon
-    puts "Вагон успешно добавлен"
+    puts 'Вагон успешно добавлен'
   end
-  # удаление вагона
+
   def del_vagon
     @vagons.delete_at(-1)
-    puts "Вагон успешно удалён"
+    puts 'Вагон успешно удалён'
   end
 
   def set_route(route)
@@ -59,9 +61,7 @@ class Train
   end
 
   def prev_station
-    if current_station_index != 0
-      @route.stations[current_station_index - 1]
-    end
+    @route.stations[current_station_index - 1] if current_station_index != 0
   end
 
   def forward
@@ -87,15 +87,16 @@ class Train
   end
 
   private
+
   def validate!
-    raise "Неверный формат номера поезда" if @number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
+    raise 'Неверный формат номера поезда' if @number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
   end
 
   def valid?
     validate!
     true
-  rescue
-    puts "Попробуйте ещё раз"
+  rescue StandardError
+    puts 'Попробуйте ещё раз'
     false
   end
 end

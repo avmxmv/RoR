@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'carriages'
 
 class PassengerCarriage < Carriage
@@ -5,7 +7,7 @@ class PassengerCarriage < Carriage
     if @filled_or_occupied + 1 <= @volume_or_quantity
       @filled_or_occupied += 1
     else
-      puts "Все места заняты"
+      puts 'Все места заняты'
     end
   end
 end

@@ -1,4 +1,6 @@
-# frozen_string_literal: true
+# rubocop:disable all
+# # frozen_string_literal: true
+
 
 class Train
   attr_accessor :number
@@ -6,19 +8,19 @@ class Train
   attr_accessor :route
   attr_accessor :vagons
 
-  @@train = {}
-  @@kol = 0
+  @train = {}
+  @kol = 0
 
   def self.find(number)
-    @@train[number]
+    @train[number]
   end
 
   def initialize(number)
     @number = number
     @vagons = []
     validate!
-    @@kol += 1
-    @@train[number] = self
+    @kol += 1
+    @train[number] = self
     puts "Создан поезд с номером #{number}"
   end
 
@@ -69,6 +71,8 @@ class Train
       @current_station.unset_train(self)
       @current_station = next_station
       @current_station.set_train(self)
+    else
+      puts 'Нет следующей станции'
     end
   end
 
@@ -77,6 +81,8 @@ class Train
       @current_station.unset_train(self)
       @current_station = prev_station
       @current_station.set_train(self)
+    else
+      puts 'Нет предыдущей станции'
     end
   end
 

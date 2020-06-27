@@ -1,17 +1,18 @@
 # frozen_string_literal: true
+# rubocop:disable all
 
 class Station
   include AllStation
   attr_accessor :trains
   attr_accessor :name
 
-  @@kol = 0
+  @kol = 0
 
   def initialize(name)
     @name = name
     @trains = []
     validate!
-    @@kol += 1
+    @kol += 1
   end
 
   def trains_by_type(type)

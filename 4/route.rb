@@ -14,13 +14,13 @@ class Route
   attr_reader :first
   attr_reader :last
 
-  @@kol = 0
+  @kol = 0
 
   def initialize(first, last)
     @first = first
     @last = last
     @stations = [first, last]
-    @@kol += 1
+    @kol += 1
     puts 'Станции успешно добавлены'
   end
 

@@ -1,8 +1,12 @@
 # rubocop:disable all
 # # frozen_string_literal: true
 
-
 class Train
+  include Acсessors
+  include Validation
+
+  attr_accessor_with_history :my_attr
+
   attr_accessor :number
   attr_accessor :speed
   attr_accessor :route
@@ -10,6 +14,10 @@ class Train
 
   @train = {}
   @kol = 0
+
+  def my_attr_history
+    my_attr.instance_variables
+  end
 
   def self.find(number)
     @train[number]
@@ -90,19 +98,5 @@ class Train
     @vagons.each do |el|
       block.call(el)
     end
-  end
-
-  private
-
-  def validate!
-    raise 'Неверный формат номера поезда' if @number !~ /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
-  end
-
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    puts 'Попробуйте ещё раз'
-    false
   end
 end

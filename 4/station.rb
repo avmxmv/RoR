@@ -2,7 +2,6 @@
 # rubocop:disable all
 
 class Station
-  include AllStation
   attr_accessor :trains
   attr_accessor :name
 

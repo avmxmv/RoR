@@ -10,6 +10,8 @@ require_relative 'cargo_trains'
 require_relative 'passenger_carriages'
 require_relative 'passenger_trains'
 require_relative 'carriages'
+require_relative 'accessor'
+require_relative 'validation'
 
 class Interface
   COMMANDS = {

@@ -9,7 +9,9 @@ module AllStation
 end
 
 class Route
+  include Validation
   include AllStation
+
   attr_accessor :stations
   attr_reader :first
   attr_reader :last
@@ -32,18 +34,5 @@ class Route
   def del_st(station)
     @station.delete(station)
     puts 'Станция успешно удалена'
-  end
-
-  private
-
-  def validate!
-    raise 'Недостаточно станций' if !first.nil? && !last.nil?
-  end
-
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
   end
 end

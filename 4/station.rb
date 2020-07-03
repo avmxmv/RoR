@@ -2,6 +2,8 @@
 # rubocop:disable all
 
 class Station
+  include Validation
+
   attr_accessor :trains
   attr_accessor :name
 
@@ -34,19 +36,5 @@ class Station
     @trains.each do |el|
       block.call(el)
     end
-  end
-
-  private
-
-  def validate!
-    raise 'Слишком длинное название' if name.length > 15
-    raise 'Слишком короткое название' if name.length < 3
-  end
-
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    false
   end
 end

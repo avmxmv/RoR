@@ -2,17 +2,17 @@
 # rubocop:disable all
 
 class Station
-  include Validation
-
   attr_accessor :trains
   attr_accessor :name
+
+  validate :name, :presence
 
   @kol = 0
 
   def initialize(name)
     @name = name
     @trains = []
-    validate!
+    valid?
     @kol += 1
   end
 
@@ -36,5 +36,13 @@ class Station
     @trains.each do |el|
       block.call(el)
     end
+  end
+
+  def valid?
+    validate!
+    true
+  rescue StandardError
+    puts 'Попробуйте ещё раз'
+    false
   end
 end

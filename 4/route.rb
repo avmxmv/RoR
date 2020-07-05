@@ -9,16 +9,18 @@ module AllStation
 end
 
 class Route
-  include Validation
   include AllStation
 
   attr_accessor :stations
   attr_reader :first
   attr_reader :last
 
+  validate :station, :type, Station
+
   @kol = 0
 
   def initialize(first, last)
+    valid?
     @first = first
     @last = last
     @stations = [first, last]
@@ -34,5 +36,13 @@ class Route
   def del_st(station)
     @station.delete(station)
     puts 'Станция успешно удалена'
+  end
+
+  def valid?
+    validate!
+    true
+  rescue StandardError
+    puts 'Попробуйте ещё раз'
+    false
   end
 end

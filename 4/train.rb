@@ -3,7 +3,6 @@
 
 class Train
   include Acсessors
-  include Validation
 
   attr_accessor_with_history :my_attr
 
@@ -11,6 +10,8 @@ class Train
   attr_accessor :speed
   attr_accessor :route
   attr_accessor :vagons
+
+  validate :number, :format, /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
 
   @train = {}
   @kol = 0
@@ -26,7 +27,7 @@ class Train
   def initialize(number)
     @number = number
     @vagons = []
-    validate!
+    valid?
     @kol += 1
     @train[number] = self
     puts "Создан поезд с номером #{number}"
@@ -98,5 +99,13 @@ class Train
     @vagons.each do |el|
       block.call(el)
     end
+  end
+
+  def valid?
+    validate!
+    true
+  rescue StandardError
+    puts 'Попробуйте ещё раз'
+    false
   end
 end

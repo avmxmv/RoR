@@ -2,7 +2,8 @@
 # # frozen_string_literal: true
 
 class Train
-  include Acсessors
+  extend Accessors
+  include Validation
 
   attr_accessor_with_history :my_attr
 
@@ -13,23 +14,19 @@ class Train
 
   validate :number, :format, /^[a-zA-Z0-9]{3}-?[a-zA-Z0-9]{2}$/
 
-  @train = {}
-  @kol = 0
-
-  def my_attr_history
-    my_attr.instance_variables
-  end
+  @@trains = {}
+  @@kol = 0
 
   def self.find(number)
-    @train[number]
+    @@trains[number]
   end
 
   def initialize(number)
     @number = number
+    validate!
     @vagons = []
-    valid?
-    @kol += 1
-    @train[number] = self
+    @@kol += 1
+    @@trains[number] = self
     puts "Создан поезд с номером #{number}"
   end
 
@@ -99,13 +96,5 @@ class Train
     @vagons.each do |el|
       block.call(el)
     end
-  end
-
-  def valid?
-    validate!
-    true
-  rescue StandardError
-    puts 'Попробуйте ещё раз'
-    false
   end
 end

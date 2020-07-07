@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 # rubocop:disable all
 
+require_relative 'accessors'
+require_relative 'validation'
 require_relative 'route'
 require_relative 'station'
 require_relative 'train'
@@ -10,8 +12,6 @@ require_relative 'cargo_trains'
 require_relative 'passenger_carriages'
 require_relative 'passenger_trains'
 require_relative 'carriages'
-require_relative 'accessor'
-require_relative 'validation'
 
 class Interface
   COMMANDS = {

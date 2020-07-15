@@ -23,7 +23,7 @@ class Route
   def initialize(first, last)
     @first = first
     @last = last
-    validate!
+    valid?
     @stations = [first, last]
     @kol += 1
     puts 'Станции успешно добавлены'

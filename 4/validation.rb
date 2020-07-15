@@ -21,13 +21,20 @@ module Validation
         when :presence
           raise "Нет значения" if value.nil? || value.empty?
         when :format
-          raise 'Неверный формат номера поезда' if value !~ validation[:options]
+          raise 'Неверный формат' if value !~ validation[:options]
         when :type
-          raise 'Неверный формат номера поезда' if value.class == validation[:options]
+          raise 'Неверный класс' if value.class != validation[:options]
         else
           puts "Неверные данные"
         end
       end
+    end
+
+    def valid?
+      validate!
+      true
+    rescue StandardError
+      false
     end
   end
 end
